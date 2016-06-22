@@ -61,7 +61,7 @@ namespace Easy.DataShare.DateShare
         /// <typeparam name="ENTITY"></typeparam>
         /// <param name="query"></param>
         /// <returns></returns>
-        DataTimeDataList<ENTITY> Select<ENTITY>(Query query, Func<IDateTimeSplitDatabase, long, IEnumerable<ENTITY>> dataExecute,
+        ListResult<ENTITY> Select<ENTITY>(Query query, Func<IDateTimeSplitDatabase, long, IEnumerable<ENTITY>> dataExecute,
             Func<IDateTimeSplitDatabase, long> countExecute);
         /// <summary>
         /// 聚合计算，count

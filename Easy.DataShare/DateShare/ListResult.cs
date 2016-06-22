@@ -7,9 +7,9 @@ namespace Easy.DataShare.DateShare
     /// 分页数据返回值
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DataTimeDataList<T>
+    public class ListResult<T>
     {
-        public DataTimeDataList(IEnumerable<T> rows, long totalRows)
+        public ListResult(IEnumerable<T> rows, long totalRows)
         {
             this.Rows = rows;
             this.TotalRows = totalRows;

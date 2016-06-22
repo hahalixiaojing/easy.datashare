@@ -52,7 +52,7 @@
     <Compile Include="DateShareExtension\ExtensionResult.cs" />
     <Compile Include="DateShareExtension\ICreateDatabase.cs" />
     <Compile Include="DateShare\BaseDateTimeSplitDatabase.cs" />
-    <Compile Include="DateShare\DateTimeDataList.cs" />
+    <Compile Include="DateShare\ListResult.cs" />
     <Compile Include="DateShare\DateTimeSplitDatabaseSelector.cs" />
     <Compile Include="DateShare\DefaultDateTimeDatabaseExecute.cs" />
     <Compile Include="DateShare\IDateTimeDatabaseExecute.cs" />

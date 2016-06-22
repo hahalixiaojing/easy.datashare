@@ -101,7 +101,7 @@ namespace Easy.DataShare.DateShare
             execute.Invoke(database);
         }
 
-        public DataTimeDataList<ENTITY> Select<ENTITY>(Query query,
+        public ListResult<ENTITY> Select<ENTITY>(Query query,
             Func<IDateTimeSplitDatabase,long, IEnumerable<ENTITY>> dataExecute,
             Func<IDateTimeSplitDatabase, long> countExecute)
         {
@@ -138,7 +138,7 @@ namespace Easy.DataShare.DateShare
 
             if (databaseIndex == -1)
             {
-                return new DataTimeDataList<ENTITY>(new ENTITY[0], databaseRows.Sum());
+                return new ListResult<ENTITY>(new ENTITY[0], databaseRows.Sum());
             }
             
             IDateTimeSplitDatabase database = databaseList.ToArray()[databaseIndex];
@@ -159,7 +159,7 @@ namespace Easy.DataShare.DateShare
             }
 
             var actualReturnRows = rows.Take(query.PageSize);
-            return new DataTimeDataList<ENTITY>(actualReturnRows, databaseRows.Sum());
+            return new ListResult<ENTITY>(actualReturnRows, databaseRows.Sum());
         }
 
         public void Update(Action<IDateTimeSplitDatabase> execute)
