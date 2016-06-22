@@ -6,7 +6,7 @@ namespace Easy.DataShare.DateShare
 {
     public  class DateTimeSplitDatabaseSelector
     {
-        private  IList<IDateTimeSplitDatabase> _DATABASE = new List<IDateTimeSplitDatabase>();
+        private readonly IList<IDateTimeSplitDatabase> _DATABASE = new List<IDateTimeSplitDatabase>();
 
         public DateTimeSplitDatabaseSelector()
         {

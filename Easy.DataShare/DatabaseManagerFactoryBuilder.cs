@@ -6,12 +6,11 @@ namespace Easy.DataShare
 {
     public class DatabaseManagerFactoryBuilder
     {
-        public DatabaseManagerFactory Build(Stream stream)
+        public IDateTimeDatabaseExecute BuildDataTimeDatabase(Stream stream)
         {
             DatabaseLoader loader = new DatabaseLoader();
             var groups = loader.Load(new XPathDocument(stream).CreateNavigator());
 
-            var factory = new DatabaseManagerFactory();
             foreach (var group in groups)
             {
                 var selector = new DateTimeSplitDatabaseSelector();
@@ -20,11 +19,9 @@ namespace Easy.DataShare
                     selector.Register(database);
                 }
                 var executor = new DefaultDateTimeDatabaseExecute(selector);
-                var manager = new DatabaseManager(executor);
-
-                factory.Register(group.Item1, manager);
+                return executor;
             }
-            return factory;
+            return null;
         }
     }
 }

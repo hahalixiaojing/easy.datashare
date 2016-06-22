@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Easy.Profile">
+      <HintPath>..\Lib\Easy.Profile.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,8 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseLoader.cs" />
-    <Compile Include="DatabaseManager.cs" />
-    <Compile Include="DatabaseManagerFactory.cs" />
     <Compile Include="DatabaseManagerFactoryBuilder.cs" />
     <Compile Include="DateShareExtension\DatabaeExtensionTriggerCondition.cs" />
     <Compile Include="DateShareExtension\DatabaseExtensionExecutor.cs" />
