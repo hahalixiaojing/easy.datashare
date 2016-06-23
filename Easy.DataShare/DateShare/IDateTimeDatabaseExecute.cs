@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Easy.DataShare.DateShare
 {
-    public interface IDateTimeDatabaseExecute
+    public interface IDateTimeDatabaseExecutor
     {
         /// <summary>
         /// 根据ID查询，在所有库执行操作

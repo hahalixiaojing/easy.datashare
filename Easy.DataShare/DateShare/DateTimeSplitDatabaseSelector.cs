@@ -6,21 +6,17 @@ namespace Easy.DataShare.DateShare
 {
     public  class DateTimeSplitDatabaseSelector
     {
-        private readonly IList<IDateTimeSplitDatabase> _DATABASE = new List<IDateTimeSplitDatabase>();
-
-        public DateTimeSplitDatabaseSelector()
+        private IDatabaseSource dataSource;
+        public DateTimeSplitDatabaseSelector(IDatabaseSource dataSource)
         {
-
+            this.dataSource = dataSource;
         }
-        public void Register(IDateTimeSplitDatabase database)
-        {
-            _DATABASE.Add(database);
-        }
+        
         public IDateTimeSplitDatabase this[int index]
         {
             get
             {
-                return _DATABASE[index];
+                return dataSource.GetDataSource()[index];
             }
         }
 
@@ -33,7 +29,7 @@ namespace Easy.DataShare.DateShare
         /// <returns></returns>
         public IEnumerable<IDateTimeSplitDatabase> Select(DateTime start,DateTime end)
         {
-            return _DATABASE.Where(m => m.IsSelected(start, end));
+            return dataSource.GetDataSource().Where(m => m.IsSelected(start, end));
         }
         public IEnumerable<IDateTimeSplitDatabase> Select(DateTime? start, DateTime? end, OrderBy orderBy)
         {
@@ -41,26 +37,26 @@ namespace Easy.DataShare.DateShare
             {
                 if(orderBy == OrderBy.ASC)
                 {
-                    return _DATABASE.OrderBy(m => m.Index);
+                    return dataSource.GetDataSource().OrderBy(m => m.Index);
                 }
-                return _DATABASE.OrderByDescending(m => m.Index);
+                return dataSource.GetDataSource().OrderByDescending(m => m.Index);
             }
 
             if(start.HasValue && end == null)
             {
                 if(orderBy == OrderBy.ASC)
                 {
-                   return  _DATABASE.Where(m => m.Index >= Select(start.Value.Date).Index).OrderBy(m => m.Index);
+                   return dataSource.GetDataSource().Where(m => m.Index >= Select(start.Value.Date).Index).OrderBy(m => m.Index);
                 }
-                return _DATABASE.Where(m => m.Index >= Select(start.Value.Date).Index).OrderByDescending(m => m.Index);
+                return dataSource.GetDataSource().Where(m => m.Index >= Select(start.Value.Date).Index).OrderByDescending(m => m.Index);
             }
             if(end.HasValue && start == null)
             {
                 if(orderBy == OrderBy.ASC)
                 {
-                    return _DATABASE.Where(m => m.Index <= Select(end.Value.Date).Index).OrderBy(m => m.Index);
+                    return dataSource.GetDataSource().Where(m => m.Index <= Select(end.Value.Date).Index).OrderBy(m => m.Index);
                 }
-                return _DATABASE.Where(m => m.Index <= Select(end.Value.Date).Index).OrderByDescending(m => m.Index);
+                return dataSource.GetDataSource().Where(m => m.Index <= Select(end.Value.Date).Index).OrderByDescending(m => m.Index);
             }
 
             if(orderBy == OrderBy.ASC)
@@ -76,7 +72,7 @@ namespace Easy.DataShare.DateShare
         /// <returns></returns>
         public IDateTimeSplitDatabase Select(DateTime datetime)
         {
-            return _DATABASE.Where(m => m.IsSelected(datetime.Date)).FirstOrDefault();
+            return dataSource.GetDataSource().Where(m => m.IsSelected(datetime.Date)).FirstOrDefault();
         }
         /// <summary>
         /// 获得当前数据库的下一个数据库（时间更远的库）
@@ -85,11 +81,11 @@ namespace Easy.DataShare.DateShare
         /// <returns></returns>
         public IDateTimeSplitDatabase Next(int currentDatabaseIndex)
         {
-            return _DATABASE.SingleOrDefault(m => m.Index == (currentDatabaseIndex - 1));
+            return dataSource.GetDataSource().SingleOrDefault(m => m.Index == (currentDatabaseIndex - 1));
         }
         public IDateTimeSplitDatabase Previous(int currentDatabaseIndex)
         {
-            return _DATABASE.SingleOrDefault(m => m.Index == (currentDatabaseIndex + 1));
+            return dataSource.GetDataSource().SingleOrDefault(m => m.Index == (currentDatabaseIndex + 1));
         }
         /// <summary>
         /// 第一个库（时间最近的库）
@@ -98,7 +94,7 @@ namespace Easy.DataShare.DateShare
         {
             get
             {
-                return _DATABASE.SingleOrDefault(m => m.Index == _DATABASE.Max(x => x.Index));
+                return dataSource.GetDataSource().SingleOrDefault(m => m.Index == dataSource.GetDataSource().Max(x => x.Index));
             }
         }
         /// <summary>
@@ -109,7 +105,7 @@ namespace Easy.DataShare.DateShare
         {
             get
             {
-                return _DATABASE.SingleOrDefault(m => m.Index == _DATABASE.Min(x => x.Index));
+                return dataSource.GetDataSource().SingleOrDefault(m => m.Index == dataSource.GetDataSource().Min(x => x.Index));
             }
         }
 
@@ -120,9 +116,8 @@ namespace Easy.DataShare.DateShare
         {
             get
             {
-                return _DATABASE.OrderByDescending(m => m.Index);
+                return dataSource.GetDataSource().OrderByDescending(m => m.Index);
             }
         }
-
     }
 }

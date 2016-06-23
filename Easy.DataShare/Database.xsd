@@ -18,18 +18,8 @@ vs:defaultnsprefix="" >
       Database share
     </xs:documentation>
   </xs:annotation>
-  <xs:element name="group">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:choice>
-          <xs:element ref="timeddatabase" maxOccurs="unbounded"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attribute name="name" type="xs:string" use="required"/>
-      <xs:attribute name="type" type="xs:string" use="required"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="timeddatabase">
+
+  <xs:element name="source">
     <xs:complexType mixed="true">
       <xs:attribute name="index" type="xs:int" use="required" />
       <xs:attribute name="start" type="xs:date" use="required" />
@@ -39,7 +29,7 @@ vs:defaultnsprefix="" >
   <xs:element name="databases">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="group" maxOccurs="unbounded"/>
+        <xs:element ref="source" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

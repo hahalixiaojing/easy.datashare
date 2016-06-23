@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseLoader.cs" />
-    <Compile Include="DatabaseManagerFactoryBuilder.cs" />
+    <Compile Include="DatabaseExecutorBuilder.cs" />
     <Compile Include="DateShareExtension\DatabaeExtensionTriggerCondition.cs" />
     <Compile Include="DateShareExtension\DatabaseExtensionExecutor.cs" />
     <Compile Include="DateShareExtension\DatabaseTemplate.cs" />
@@ -58,6 +58,9 @@
     <Compile Include="DateShare\IDateTimeDatabaseExecute.cs" />
     <Compile Include="DateShare\IDateTimeSplitDatabase.cs" />
     <Compile Include="DateShare\Query.cs" />
+    <Compile Include="IDatabaseSource.cs" />
+    <Compile Include="LocalFileDatabaseSource.cs" />
+    <Compile Include="ProfileDatabaseSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

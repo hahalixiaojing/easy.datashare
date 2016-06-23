@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Easy.DataShare.DateShare
 {
-    public class DefaultDateTimeDatabaseExecute : IDateTimeDatabaseExecute
+    public class DefaultDateTimeDatabaseExecute : IDateTimeDatabaseExecutor
     {
         private readonly DateTimeSplitDatabaseSelector selector;
 
